@@ -1,0 +1,62 @@
+---
+interface Props {
+  regions: { [key: string]: string };
+}
+const { regions } = Astro.props;
+---
+
+<section
+  class="border border-amber-900/60 w-[400px] h-[300px] bg-gray-700 rounded-lg flex flex-col justify-center items-center"
+>
+  <header class="rounded-t-lg bg-gray-800 w-full">
+    <h3 class="font-bold text-xl text-center py-4">Selecciona tu región</h3>
+  </header>
+  <hr class="border border-white/10 w-full" />
+  <div class="flex-1 mx-auto flex flex-col justify-center items-center">
+    <p class="text-balance font-medium text-center mb-4">
+      Selecciona la región en la que desees utilizar el Mercado central.
+    </p>
+    <select
+      class="border-2 border-white/10 py-2 px-4 rounded"
+      name="regions"
+      id="regions"
+    >
+      <option selected="true" disabled="true">Selecciona</option>
+      {
+        Object.entries(regions).map(([key, value]) => (
+          <option value={key}>{value}</option>
+        ))
+      }
+    </select>
+  </div>
+  <hr class="border border-white/50 w-full" />
+  <footer class="my-4">
+    <a
+      id="anchorRegions"
+      class="border border-white/15 hover:border-white/30 py-2 px-4 rounded bg-transparent"
+    >
+      Continuar
+    </a>
+  </footer>
+</section>
+<script type="module">
+  let $anchor = document.getElementById("anchorRegions");
+  let $select = document.getElementById("regions");
+
+  $anchor.removeAttribute("href");
+  let optionValue;
+
+  $select.addEventListener("change", () => {
+    const selectedOption = $select.options[$select.selectedIndex];
+    optionValue = selectedOption.value;
+    $anchor.setAttribute("href", `/${optionValue}/store`);
+    $anchor.classList.remove("bg-transparent");
+    $anchor.classList.toggle("bg-white");
+    $anchor.classList.toggle("text-black");
+  });
+  if ($anchor.hasAttribute("href")) {
+    $anchor.addEventListener("click", () => {
+      $anchor.setAttribute("href", `/${optionValue}/store`);
+    });
+  }
+</script>

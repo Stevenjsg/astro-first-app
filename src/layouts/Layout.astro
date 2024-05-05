@@ -1,8 +1,7 @@
 ---
-import { ViewTransitions } from 'astro:transitions'
-import NavigationBar from '../components/NavigationBar.astro';
+import { ViewTransitions } from "astro:transitions";
 interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
@@ -10,28 +9,31 @@ const { title } = Astro.props;
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<ViewTransitions />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<NavigationBar />
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <ViewTransitions />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+    <style is:global>
+      :root {
+        color-scheme: dark light;
+      }
+      html {
+        font-family: system-ui, sans-serif;
+      }
+      .text-balance {
+        text-wrap: balance;
+      }
+      body {
+        position: relative;
+        height: 100dvh;
+      }
+    </style>
+  </body>
 </html>
-<style is:global>
-	:root {
-		color-scheme: dark light;
-	}
-	html {
-		font-family: system-ui, sans-serif;
-	}
-	.text-balance{
-		text-wrap: balance;
-	}
-</style>

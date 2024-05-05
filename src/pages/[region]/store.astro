@@ -1,0 +1,122 @@
+---
+import { region as regions } from "@data/data.json";
+import Layout from "@layouts/Layout.astro";
+
+export const getStaticPaths = () => {
+  const paths = Object.entries(regions).map(([key]) => ({
+    params: {
+      region: key,
+    },
+  }));
+  return paths;
+};
+const { region } = Astro.params;
+const regionName: string = regions[region as keyof typeof regions];
+---
+
+<Layout title=`Mercado Central ${regionName}`>
+  <header class="grid place-items-center pt-4">
+    <hgroup class="flex flex-col items-center">
+      <h1 class="font-medium text-3xl">Mercado Central</h1>
+      <h2 class="text-xl text-amber-800">{regionName}</h2>
+    </hgroup>
+    <nav class="my-4 flex w-full justify-start px-5">
+      <a
+        class="border border-white/10 px-6 py-2 rounded-md flex"
+        href="/"
+        data-astro-history="replace"
+      >
+        <span class="w-8 h-8">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+              d="M5 12l14 0"></path><path d="M5 12l6 6"></path><path
+              d="M5 12l6 -6"></path></svg
+          >
+        </span>
+      </a>
+    </nav>
+  </header>
+  <main class="border border-transparent px-5 w-full mx-auto h-[80%] rounded">
+    <aside
+      class="asideCompras flex flex-col py-4 px-0.5 max-w-[72px] justify-between"
+    >
+      <div class="space-y-2">
+        <button
+          class="h-16 w-full rounded shadow border border-transparent bg-slate-500 hover:bg-slate-600 transition-colors duration-500"
+          >Compra</button
+        >
+        <button
+          class="h-16 w-full rounded shadow border border-transparent bg-slate-500 hover:bg-slate-600 transition-colors duration-500"
+          >Venta</button
+        >
+      </div>
+      <div>
+        <span>macuto</span>
+        <span>Kamarbor</span>
+      </div>
+    </aside>
+    <aside class="asideMoney flex flex-col">
+      <span>Money</span>
+      <span>Capacidad</span>
+    </aside>
+    <section class="buscador">
+      <label>
+        Buscador
+        <input type="text" name="" id="" />
+      </label>
+    </section>
+    <section class="listaProductos">
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </section>
+    <section class="productos">
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </section>
+  </main>
+</Layout>
+<style>
+  main {
+    display: grid;
+    grid-template-columns: 72px 1fr 4fr;
+    grid-template-rows: 100px 2fr;
+    grid-template-areas:
+      "asideCompras asideMoney buscador"
+      "asideCompras productos listaProductos"
+      "asideCompras productos  listaProductos";
+  }
+  .asideCompras {
+    grid-area: asideCompras;
+    background: #696969;
+  }
+  .asideMoney {
+    grid-area: asideMoney;
+    background: #0a0a0a;
+  }
+  .buscador {
+    grid-area: buscador;
+    background: rgb(204, 82, 188);
+  }
+
+  .listaProductos {
+    grid-area: listaProductos;
+    background: rgb(91, 213, 219);
+  }
+  .productos {
+    grid-area: productos;
+    background: rgb(168, 123, 123);
+  }
+</style>
